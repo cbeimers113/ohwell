@@ -16,10 +16,9 @@ class Player:
         deck.cards.remove(card)
         self.hand=Deck.sort(self.hand)
 
-
     def __str__(self):
-        string=self.name+" ["
+        string=self.name
+        if len(self.hand)>0:string+=" ["
         for card in self.hand:
-            string+=str(card)+", "
-        string+="]"
+            string+=str(card)+(", " if self.hand.index(card)<len(self.hand)-1 else "]")
         return string

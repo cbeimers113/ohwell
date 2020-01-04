@@ -18,6 +18,7 @@ class Card:
 
     #Class methods =================================================
 
+    @staticmethod
     #Return the highest card in a set of suit specified
     def highest(cards, suit):
         if len(cards)==0:return None
@@ -31,8 +32,9 @@ class Card:
             if card.beats(highest):highest=card
         return highest
 
+    @staticmethod
     #Return the lowest card in a set of suit specified
-    def highest(cards, suit):
+    def lowest(cards, suit):
         if len(cards)==0:return None
         toCheck=[]
         for card in cards:

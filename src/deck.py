@@ -19,12 +19,13 @@ class Deck:
     
     #Class methods================================================================================
 
+    @staticmethod
     #Sort into sub-decks by suit, then sort those by rank
     def sort(cards):
         bySuit=[[],[],[],[]]
         for card in cards:
-            bySuit[SUITS.index(card.suit)].append(card)
-            cards.remove(card)
+            index=SUITS.index(card.suit)
+            bySuit[index].append(card)
 
         sorted=[]
         for suit in bySuit:

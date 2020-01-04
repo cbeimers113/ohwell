@@ -6,9 +6,10 @@ class Player:
     #Instance methods===========================================================================
 
     #Constructor
-    def __init__(self, name):
+    def __init__(self, name, isBot):
         self.name=name
         self.hand=[]
+        self.isBot=isBot
 
     #Deal card from source deck to player; deck is passed so that the card can be removed from it
     def deal(self, deck, card):

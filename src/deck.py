@@ -12,10 +12,16 @@ class Deck:
             for rank in RANKS:
                 self.cards.append(Card(suit, rank))
 
-    #Instance shuffle method
+    #Shuffle method
     def shuffle(self):
         for i in range(10): #Give it a good shufflin'
             random.shuffle(self.cards)
+
+    #Find out what trump suit is
+    def getTrump(self):
+        if len(self.cards)==0:
+            return random.choice(SUITS)
+        return self.cards[0].suit
     
     #Class methods================================================================================
 

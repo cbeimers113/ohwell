@@ -10,9 +10,11 @@ if sys.version_info < (3, 0):
 
 #Access src folder
 sys.path.insert(1, "/src")
+sys.path.insert(1, "/src/bots")
 from src.deck import Deck
 from src.player import Player
 from src.util import getConf, clear
+from src.bots.learner import LearnBot
 
 #The game loop
 def startGame(players):
@@ -20,19 +22,31 @@ def startGame(players):
     
     for handCount in range(1, 26):
         hand=handCount if handCount<14 else 26-handCount
+        
+        #Shuffle the deck
         deck.shuffle()
 
         #Deal the cards
         for dealing in range(hand):
             for player in players:
                 player.deal(deck, deck.cards[0])
+        
+        #Determine trump suit
+        trump=deck.getTrump()
+        print("Trump is "+trump)
 
+        #Make bets
         bets=[]
-        #for i in range(len(players)):
-        #   bets[i]=players[i].bet()
+        for player in players:
+            i=players.index(player)
+            bets.append(player.bet(hand, trump, i==0))
+            print(str(player)+" bets "+str(bets[i]))
 
-        table=[]
+        sys.exit(0)
+
         #Play hand
+        table=[]
+        
 
         #Cleanup table, cards go back to deck        
         for i in range(len(table)):
@@ -44,26 +58,14 @@ def startGame(players):
 def main():
     clear()
 
-    players=[]
-    for i in range(4):
-        #Bots can be passed along command line, remove this
-        if i<len(sys.argv[1:]):
-            players.append(Player(sys.argv[1:][i], True))
-            continue
-        
-        name=input("Enter player "+str(i+1)+"\'s name: ")
-        isBot=getConf("Is this player a bot?")    
-        players.append(Player(name, isBot))
+    players=[LearnBot(), LearnBot(), LearnBot()]
+    for i in range(len(players), 4):
+        name=input("Enter player "+str(i+1)+"\'s name: ")  
+        players.append(Player(name, False))
         print("")
-
-    for i in range(len(players)):
-        for j in range(len(players)):
-            if j!=i and players[i].name==players[j].name:
-                players[i].name+="1"
-                players[j].name+="2"
     
     print("Welcome to \'Oh Well\'")
-    time.sleep(3)
+    #time.sleep(3)
     clear()
     startGame(players)
 

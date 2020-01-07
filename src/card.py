@@ -1,3 +1,5 @@
+from colorama import Fore, Back, Style
+
 SUITS = ["♥", "♣", "♦", "♠"]
 RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
@@ -14,7 +16,8 @@ class Card:
         return card.suit==self.suit and RANKS.index(self.rank)>RANKS.index(card.rank)
 
     def __str__(self):
-        return self.rank+self.suit
+        fores=[Fore.RED, Fore.BLACK]
+        return fores[SUITS.index(self.suit)%2]+Back.WHITE+self.rank+self.suit+" "+Style.RESET_ALL
 
     #Class methods =================================================
 

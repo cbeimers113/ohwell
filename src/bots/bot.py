@@ -4,6 +4,7 @@ sys.path.insert(1, "../")
 from src.player import Player
 from src.card import Card, SUITS, RANKS
 from random import choice
+from time import sleep
 
 class Bot(Player):
 
@@ -28,6 +29,7 @@ class Bot(Player):
     #TODO: don't play a trump if reached goal, bet more if leading and have high card, bet more if num cards is low 
     #Play a card
     def play(self, table, trump, tricks, bet):
+        sleep(1)
         cards=[]
         for card in self.hand:
             cards.append(card)

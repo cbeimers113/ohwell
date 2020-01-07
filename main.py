@@ -133,7 +133,7 @@ def main():
     clear()
 
     players=[LearnBot(), LearnBot(), LearnBot(), LearnBot()]
-    for i in range(4):
+    for i in range(len(players)):
         players[i].name+=str(i)
 
     for i in range(len(players), 4):
